@@ -1,0 +1,36 @@
+language: python
+sudo: false
+
+python:
+  - "pypy3.5-5.8.0"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+env:
+  matrix:
+    - PYTHONOPTIMIZE=
+    - PYTHONOPTIMIZE=1
+
+install:
+  - travis_retry pip install --upgrade setuptools pytest
+  - pip install -e '.[development]'
+
+script:
+  - python setup.py test
+
+after_script:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  irc:
+    channels:
+      - 'irc.freenode.org#webcore'
+    use_notice: true
+    skip_join: true
+    on_success: change
+    on_failure: change
+    template:
+      - "%{repository_slug}:%{branch}@%{commit} %{message}"
+      - "Duration: %{duration} - Details: %{build_url}"
