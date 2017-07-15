@@ -24,7 +24,7 @@ class Crumb(tuple):
 		return tuple.__new__(cls, (
 				dispatcher,
 				origin,
-				cls.Path(path),
+				cls.Path(path) if path else None,
 				endpoint,
 				handler,
 				frozenset(options) if options else None,

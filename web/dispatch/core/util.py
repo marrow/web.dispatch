@@ -29,6 +29,6 @@ def prepare_path(path):
 		path = PurePosixPath(path)
 	
 	if isinstance(path, Path):
-		path = deque(path.parts)[1 if path.root else 0:])
+		path = deque(path.parts[1 if path.root else 0:])
 	else:
 		path = deque(path)
