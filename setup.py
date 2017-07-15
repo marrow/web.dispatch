@@ -13,7 +13,7 @@ from setuptools import setup
 if sys.version_info < (3, 3):
 	raise SystemExit("Python 3.3 or later is required.")
 
-exec(open(os.path.join("web", "dispatch", "release.py")).read())
+exec(open(os.path.join("web", "dispatch", "core", "release.py")).read())
 
 
 here = os.path.abspath(os.path.dirname(__file__))
