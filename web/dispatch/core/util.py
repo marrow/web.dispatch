@@ -45,21 +45,15 @@ def opts(obj):
 	
 	if isclass(obj):
 		if '__call__' in dir(obj):
-			return opts(obj.__call__)
+			obj = obj.__call__
 		else:
 			return
 	
-	try:
+	if '__options__' in dir(obj):
 		return obj.__options__
-	except AttributeError:
-		pass
 	
 	if callable(obj):
 		sig = signature(obj)
 		
 		if len(sig.parameters) > 1:
 			return {'GET', 'POST'}
-	
-	return {'GET'}
-
-
