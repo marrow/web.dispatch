@@ -41,6 +41,13 @@ class Crumb(tuple):
 		
 		return result
 	
+	def __json__(self):
+		"""Return a new OrderedDict which maps field names to their values."""
+		
+		return OrderedDict(zip(self._fields, self))
+	
+	as_dict = as_json = property(__json__)
+	
 	def replace(self, **kw):
 		"""Return a new Crumb replacing specified fields with new values."""
 		
