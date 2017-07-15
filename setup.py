@@ -59,7 +59,7 @@ setup(
 			"Topic :: Software Development :: Libraries :: Python Modules",
 		],
 	
-	packages = ['web.dispatch'],
+	packages = ['web.dispatch.core'],
 	include_package_data = True,
 	package_data = {'': ['README.rst', 'LICENSE.txt']},
 	zip_safe = False,
