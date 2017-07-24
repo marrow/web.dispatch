@@ -17,14 +17,14 @@ veryclean: clean
 	rm -rvf *.egg-info dist
 
 test: develop
-	./setup.py test
+	py.test
 
 release:
 	./setup.py sdist bdist_wheel upload ${RELEASE_OPTIONS}
 	@echo -e "\nView online at: https://pypi.python.org/pypi/${PROJECT} or https://pypi.org/project/${PROJECT}/"
 	@echo -e "Remember to make a release announcement and upload contents of dist/ folder as a Release on GitHub.\n"
 
-${PROJECT}.egg-info/PKG-INFO: setup.py setup.cfg web/dispatch/object/release.py
+${PROJECT}.egg-info/PKG-INFO: setup.py setup.cfg web/dispatch/core/release.py
 	@mkdir -p ${VIRTUAL_ENV}/lib/pip-cache
 	pip install --cache-dir "${VIRTUAL_ENV}/lib/pip-cache" -e ".[${USE}]"
 

@@ -14,7 +14,7 @@ env:
     - PYTHONOPTIMIZE=1
 
 install:
-  - travis_retry pip install --upgrade setuptools pytest
+  - travis_retry pip install -U setuptools pip pytest
   - pip install -e '.[development]'
 
 script:
