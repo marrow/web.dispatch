@@ -13,6 +13,9 @@ from setuptools import setup
 if sys.version_info < (3, 3):
 	raise SystemExit("Python 3.3 or later is required.")
 
+
+version = description = url = author = None
+
 exec(open(os.path.join("web", "dispatch", "core", "release.py")).read())
 
 
