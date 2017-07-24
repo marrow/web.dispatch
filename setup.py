@@ -73,7 +73,9 @@ setup(
 			'pytest-runner',
 		] if {'pytest', 'test', 'ptr'}.intersection(sys.argv) else [],
 	
-	install_requires = [],
+	install_requires = [
+			'pathlib; python_version < "3.4"',  # Path manipulation utility lib; builtin from 3.4.
+		],
 	
 	extras_require = dict(
 			development = tests_require + ['pre-commit'],  # Development-time dependencies.
