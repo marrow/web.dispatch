@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
 
-import sys
-import codecs
-
 from setuptools import setup
 from sys import argv, version_info as python_version
 from pathlib import Path
 
 
-if sys.version_info < (3, 6):
+if python_version < (3, 6):
 	raise SystemExit("Python 3.6 or later is required.")
-
 
 here = Path(__file__).resolve().parent
 version = description = url = author = None  # Populate by the next line.
