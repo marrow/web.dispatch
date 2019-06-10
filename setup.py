@@ -1,31 +1,25 @@
-#!/usr/bin/env python
-# encoding: utf-8
+#!/usr/bin/env python3
 
-from __future__ import print_function
-
-import os
 import sys
 import codecs
 
 from setuptools import setup
+from sys import argv, version_info as python_version
+from pathlib import Path
 
 
-if sys.version_info < (3, 3):
-	raise SystemExit("Python 3.3 or later is required.")
+if sys.version_info < (3, 6):
+	raise SystemExit("Python 3.6 or later is required.")
 
 
-version = description = url = author = None
-
-exec(open(os.path.join("web", "dispatch", "core", "release.py")).read())
-
-
-here = os.path.abspath(os.path.dirname(__file__))
+here = Path(__file__).resolve().parent
+version = description = url = author = None  # Populate by the next line.
+exec((here / "web" / "dispatch" / "core" / "release.py").read_text('utf-8'))
 
 tests_require = [
 		'pytest',  # test collector and extensible runner
 		'pytest-cov',  # coverage reporting
 		'pytest-flakes',  # syntax validation
-		'pytest-catchlog',  # log capture
 		'pytest-isort',  # import ordering
 	]
 
@@ -35,15 +29,20 @@ setup(
 	version = version,
 	
 	description = description,
-	long_description = codecs.open(os.path.join(here, 'README.rst'), 'r', 'utf8').read(),
+	long_description = (here / 'README.rst').read_text('utf-8'),
 	url = url,
-	download_url = 'https://pypi.org/project/web.dispatch/',
+	download_url = 'https://pypi.org/project/web.dispatch/releases',
 	
 	author = author.name,
 	author_email = author.email,
 	
 	license = 'MIT',
-	keywords = ['marrow', 'dispatch', 'url dispatch', 'endpoint discovery'],
+	keywords = [
+			'marrow',
+			'dispatch',
+			'url dispatch',
+			'endpoint discovery',
+		],
 	classifiers = [
 			"Development Status :: 5 - Production/Stable",
 			"Environment :: Console",
@@ -53,10 +52,9 @@ setup(
 			"Operating System :: OS Independent",
 			"Programming Language :: Python",
 			"Programming Language :: Python :: 3",
-			"Programming Language :: Python :: 3.3",
-			"Programming Language :: Python :: 3.4",
-			"Programming Language :: Python :: 3.5",
 			"Programming Language :: Python :: 3.6",
+			"Programming Language :: Python :: 3.7",
+			"Programming Language :: Python :: 3.8",
 			"Programming Language :: Python :: Implementation :: CPython",
 			"Programming Language :: Python :: Implementation :: PyPy",
 			"Topic :: Software Development :: Libraries :: Python Modules",
@@ -67,23 +65,20 @@ setup(
 	package_data = {'': ['README.rst', 'LICENSE.txt']},
 	zip_safe = False,
 	
-	# Dependency Declaration
+	python_requires = '~=3.6',
 	
 	setup_requires = [
 			'pytest-runner',
-		] if {'pytest', 'test', 'ptr'}.intersection(sys.argv) else [],
+		] if {'pytest', 'test', 'ptr'}.intersection(argv) else [],
 	
 	install_requires = [
-			'pathlib; python_version < "3.4"',  # Path manipulation utility lib; builtin from 3.4.
 		],
+	
+	tests_require = tests_require,
 	
 	extras_require = dict(
 			development = tests_require + ['pre-commit'],  # Development-time dependencies.
 		),
-	
-	tests_require = tests_require,
-	
-	# Plugin Registration
 	
 	entry_points = {
 			'web.dispatch': [
