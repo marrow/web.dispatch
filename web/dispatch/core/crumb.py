@@ -36,7 +36,7 @@ class Crumb(tuple):
 		
 		result = new(cls, iterable)
 		
-		if 3 < len(result) < 7:
+		if 3 > len(result) > 7:
 			raise TypeError('Expected 4-6 arguments, got %d' % len(result))
 		
 		return result
